@@ -1,26 +1,68 @@
-@import "tailwindcss";
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* ----- small base resets ----- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --site-bg: #ffffff;
+  --muted: #6b7280;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--site-bg);
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* remove default list styling inside footer and nav */
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* safe aspect utility (16:9) */
+.aspect-16-9 { aspect-ratio: 16 / 9; }
+
+/* ensure images behave predictably */
+img { display: block; max-width: 100%; height: auto; }
+
+/* prevent image selection/drag in gallery */
+img[draggable="false"] {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* used when lightbox is open to lock scroll */
+body.no-scroll { overflow: hidden !important; }
+
+/* lightbox arrow fallback styling (keeps consistent if inline styles missing) */
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 28px;
+  background: rgba(0,0,0,0.32);
+  border: none;
+  width: 44px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10001;
+  transition: background 0.12s ease;
+}
+.lightbox-arrow:hover { background: rgba(255,255,255,0.08); }
+.lightbox-arrow.left-3 { left: 12px; }
+.lightbox-arrow.right-3 { right: 12px; }
+
+/* Footer fallback (only used if Tailwind didn't load yet) */
+.footer-fallback {
+  background: #0f1724;
+  color: #e6edf3;
 }

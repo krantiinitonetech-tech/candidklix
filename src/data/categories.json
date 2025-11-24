@@ -1,0 +1,32 @@
+[
+  {
+    "id": "wedding",
+    "title": "Wedding",
+    "folderId": "1HXXCnKoa5igEj9xYUq6PAoWW3dnxlmYB",
+    "type": "photo"
+  },
+  {
+    "id": "baby-shower",
+    "title": "Baby Shower",
+    "folderId": "1xdxLr-YMsNqDb1fSAxLae_QO3_yRgImv",
+    "type": "photo"
+  },
+  {
+    "id": "graduation",
+    "title": "Graduation",
+    "folderId": "1uXnrrFm2Fo008n5F8Mj8pky5SborUBOI",
+    "type": "photo"
+  },
+  {
+    "id": "food photography",
+    "title": "Food Photography",
+    "folderId": "1LopRfIwni5VhmOWQ2DTbLs8GYCV_mAFy",
+    "type": "photo"
+  },
+  {
+    "id": "others",
+    "title": "Others",
+    "folderId": "1AeklwUXLtF9bdjFQLW1bv2lCNwbzwrEB",
+    "type": "photo"
+  }
+]
