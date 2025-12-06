@@ -13,13 +13,15 @@ import type { EventInput } from "@fullcalendar/core";
 export default function CalendarPage() {
   const router = useRouter();
 
+  // authentication state
   const [authReady, setAuthReady] = useState<boolean>(false);
 
-  // typed state
+  // FIXED: typed calendar state
   const [events, setEvents] = useState<EventInput[]>([]);
   const [totalEvents, setTotalEvents] = useState<number>(0);
   const [monthEvents, setMonthEvents] = useState<number>(0);
 
+  // protect route
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (!user) router.push("/admin/login");
@@ -28,20 +30,24 @@ export default function CalendarPage() {
     return () => unsub();
   }, [router]);
 
+  // load events
   useEffect(() => {
     if (!authReady) return;
 
     (async () => {
       const snap = await getDocs(collection(db, "bookings"));
+
       const list: EventInput[] = snap.docs.map((d) => {
         const x = d.data() as any;
-        // Normalize start to ISO string (FullCalendar accepts ISO)
-        const raw = x.eventDate || x.date || x.eventDateRaw || "";
-        const startIso = raw ? new Date(raw).toISOString() : new Date().toISOString();
+
+        // normalize start date to ISO (required for FullCalendar + TypeScript)
+        const rawDate = x.eventDate || x.date || "";
+        const isoDate = rawDate ? new Date(rawDate).toISOString() : new Date().toISOString();
+
         return {
           id: d.id,
           title: `${x.eventType || "Event"} – ${x.name || ""}`,
-          start: startIso,
+          start: isoDate,
           allDay: true,
           extendedProps: { ...x },
         } as EventInput;
@@ -50,6 +56,7 @@ export default function CalendarPage() {
       setEvents(list);
       setTotalEvents(list.length);
 
+      // count this month's events
       const now = new Date();
       const month = now.getMonth();
       const year = now.getFullYear();
@@ -63,7 +70,9 @@ export default function CalendarPage() {
     })();
   }, [authReady]);
 
-  if (!authReady) return <div className="p-6 text-center">Checking admin permissions…</div>;
+  if (!authReady) {
+    return <div className="p-6 text-center">Checking admin permissions…</div>;
+  }
 
   return (
     <div className="p-6">
@@ -71,10 +80,12 @@ export default function CalendarPage() {
 
       <div className="flex gap-8 mb-6 text-lg font-medium">
         <p>
-          Total events: <span className="font-bold text-blue-600">{totalEvents}</span>
+          Total events:{" "}
+          <span className="font-bold text-blue-600">{totalEvents}</span>
         </p>
         <p>
-          This month: <span className="font-bold text-green-600">{monthEvents}</span>
+          This month:{" "}
+          <span className="font-bold text-green-600">{monthEvents}</span>
         </p>
       </div>
 
