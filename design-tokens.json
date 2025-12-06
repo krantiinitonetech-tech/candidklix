@@ -1,0 +1,15 @@
+{
+  "colors": {
+    "primary": "#1F2937",
+    "accent": "#F97316",
+    "muted": "#6B7280",
+    "bg": "#FFFFFF",
+    "card": "#FAFAFB"
+  },
+  "font": {
+    "base": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue'"
+  },
+  "spacing": {
+    "container": "1200px"
+  }
+}
