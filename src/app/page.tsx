@@ -14,18 +14,14 @@ import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 
-
-export default function HomePage(): JSX.Element {
+export default function HomePage() {
   return (
     <div className="bg-white text-gray-900">
-      {/* ===== HERO (moved to component for pixel-perfect Figma mapping) ===== */}
       <Hero />
       <About />
       <Services />
-      <Gallery /> 
+      <Gallery />
       <Testimonials />
-      {/* ===== MAIN ===== */}
- 
     </div>
   );
 }
