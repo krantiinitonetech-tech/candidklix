@@ -1,0 +1,16 @@
+{
+  "colors": {
+    "brand": "#FF6B81",
+    "cream": "#FFF7F5",
+    "body": "#374151",
+    "heading": "#0F1724",
+    "muted": "#6B7280"
+  },
+  "radii": {
+    "card": "12px",
+    "pill": "999px"
+  },
+  "shadows": {
+    "lg": "0 12px 40px rgba(2,6,23,0.08)"
+  }
+}

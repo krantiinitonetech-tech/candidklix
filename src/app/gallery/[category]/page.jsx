@@ -1,3 +1,400 @@
+// "use client";
+
+// import React, {
+//   useEffect,
+//   useState,
+//   useCallback,
+//   useRef,
+//   useMemo,
+// } from "react";
+
+// /**
+//  * Category gallery page with lightweight lightbox.
+//  * - Expects /api/gallery/[category] to return { category, files: [{ id, name, mimeType, thumbnailLink? }] }
+//  * - Works without changing backend; builds Drive URLs from file.id
+//  */
+// export default function CategoryPage(props) {
+//   // Unwrap params Promise (Next 16 dynamic API)
+//   const resolved = React.use(props.params);
+//   const { category } = resolved || {};
+
+//   const [title, setTitle] = useState("");
+//   const [files, setFiles] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const mountedRef = useRef(true);
+
+//   // Lightbox state
+//   const [isOpen, setIsOpen] = useState(false);
+//   const [index, setIndex] = useState(0);
+
+//   useEffect(() => {
+//     mountedRef.current = true;
+//     return () => {
+//       mountedRef.current = false;
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     if (!category) return;
+//     setLoading(true);
+//     (async () => {
+//       try {
+//         const res = await fetch(`/api/gallery/${category}`);
+//         const data = await res.json();
+//         if (!mountedRef.current) return;
+//         setTitle(data?.category || category);
+//         setFiles(Array.isArray(data?.files) ? data.files : []);
+//       } catch (err) {
+//         console.error("Failed to fetch gallery:", err);
+//         setFiles([]);
+//       } finally {
+//         if (mountedRef.current) setLoading(false);
+//       }
+//     })();
+//   }, [category]);
+
+//   // Build Drive URLs
+//   const getThumbUrl = (file) => {
+//     if (!file?.id) return "";
+//     // small/large thumbnails for the grid (thumbnail endpoint)
+//     return `https://drive.google.com/thumbnail?id=${file.id}&sz=w1200`;
+//   };
+//   const getFullUrl = (file) => {
+//     if (!file?.id) return "";
+//     // full-size view URL (works well for Drive-hosted images)
+//     return `https://drive.google.com/uc?export=view&id=${file.id}`;
+//   };
+
+//   // Derived list of images for lightbox navigation
+//   const imageList = useMemo(
+//     () =>
+//       files.map((f) => ({
+//         id: f.id,
+//         name: f.name,
+//         thumb: getThumbUrl(f),
+//         full: getFullUrl(f),
+//       })),
+//     [files]
+//   );
+
+//   // open lightbox
+//   const openAt = useCallback((i) => {
+//     setIndex(i);
+//     setIsOpen(true);
+//     // lock scroll
+//     document.body.style.overflow = "hidden";
+//   }, []);
+
+//   // close lightbox
+//   const close = useCallback(() => {
+//     setIsOpen(false);
+//     document.body.style.overflow = "";
+//   }, []);
+
+//   const next = useCallback(() => {
+//     setIndex((p) => (p + 1) % imageList.length);
+//   }, [imageList.length]);
+
+//   const prev = useCallback(() => {
+//     setIndex((p) => (p - 1 + imageList.length) % imageList.length);
+//   }, [imageList.length]);
+
+//   // keyboard handling
+//   useEffect(() => {
+//     if (!isOpen) return;
+//     function onKey(e) {
+//       if (e.key === "Escape") close();
+//       if (e.key === "ArrowRight") next();
+//       if (e.key === "ArrowLeft") prev();
+//     }
+//     window.addEventListener("keydown", onKey);
+//     return () => window.removeEventListener("keydown", onKey);
+//   }, [isOpen, close, next, prev]);
+
+//   // click outside detection for the large image
+//   const overlayRef = useRef(null);
+//   const onOverlayClick = (e) => {
+//     if (e.target === overlayRef.current) close();
+//   };
+
+//   return (
+//     <div className="category-root">
+//       <div className="category-inner">
+//         <header className="category-header">
+//           <h1>{title || "Gallery"}</h1>
+//           <p>Explore curated memories from our {title || "collection"}.</p>
+//         </header>
+
+//         {loading ? (
+//           <div className="loading">Loading images…</div>
+//         ) : files.length === 0 ? (
+//           <div className="empty">No images found in this collection.</div>
+//         ) : (
+//           <div className="grid">
+//             {imageList.map((img, i) => (
+//               <article
+//                 key={img.id || i}
+//                 className="card"
+//                 onClick={() => openAt(i)}
+//                 role="button"
+//                 tabIndex={0}
+//                 onKeyDown={(e) => (e.key === "Enter" ? openAt(i) : null)}
+//               >
+//                 <div className="media">
+//                   {/* Use <img> directly so SSR works; if broken, fallback background */
+//                   img.thumb ? (
+//                     <img src={img.thumb} alt={img.name || title} />
+//                   ) : (
+//                     <div className="placeholder" />
+//                   )}
+//                 </div>
+
+//                 {/* caption area omitted to avoid long drive filenames */}
+//                 <div className="meta">
+//                   <span className="meta-title">{/* optional caption */}</span>
+//                 </div>
+//               </article>
+//             ))}
+//           </div>
+//         )}
+//       </div>
+
+//       {/* LIGHTBOX */}
+//       {isOpen && imageList[index] && (
+//         <div
+//           className="lightbox-overlay"
+//           ref={overlayRef}
+//           onMouseDown={onOverlayClick}
+//           aria-modal="true"
+//           role="dialog"
+//         >
+//           <div className="lightbox-inner">
+//             <button
+//               className="lb-close"
+//               aria-label="Close"
+//               onClick={close}
+//             >
+//               ✕
+//             </button>
+
+//             <button className="lb-nav lb-prev" onClick={prev} aria-label="Previous image">
+//               ‹
+//             </button>
+
+//             <div className="lb-media">
+//               <img
+//                 src={imageList[index].full}
+//                 alt={imageList[index].name || `Image ${index + 1}`}
+//                 onError={(e) => {
+//                   // fallback to thumb if full fails
+//                   if (imageList[index].thumb) e.target.src = imageList[index].thumb;
+//                 }}
+//               />
+//               <div className="lb-caption">
+//                 {imageList[index].name ? <span>{imageList[index].name}</span> : null}
+//               </div>
+//             </div>
+
+//             <button className="lb-nav lb-next" onClick={next} aria-label="Next image">
+//               ›
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       <style jsx>{`
+//         :root {
+//           --bg: #fbf7f6;
+//           --card: #fff;
+//           --muted: #7a7a7a;
+//           --shadow: rgba(18, 18, 18, 0.06);
+//         }
+//         .category-root {
+//           background: var(--bg);
+//           min-height: 100vh;
+//           padding: 56px 20px;
+//         }
+//         .category-inner {
+//           max-width: 1200px;
+//           margin: 0 auto;
+//         }
+//         .category-header {
+//           text-align: center;
+//           margin-bottom: 36px;
+//         }
+//         .category-header h1 {
+//           font-family: var(--font-heading);
+//           font-size: 44px;
+//           margin: 0;
+//           color: #222;
+//         }
+//         .category-header p {
+//           margin-top: 8px;
+//           color: var(--muted);
+//         }
+
+//         .loading,
+//         .empty {
+//           text-align: center;
+//           padding: 40px 0;
+//           color: var(--muted);
+//         }
+
+//         .grid {
+//           display: grid;
+//           grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+//           gap: 26px;
+//         }
+
+//         .card {
+//           background: var(--card);
+//           border-radius: 14px;
+//           overflow: hidden;
+//           box-shadow: 0 10px 28px var(--shadow);
+//           cursor: zoom-in;
+//           transition: transform 220ms ease, box-shadow 220ms ease;
+//           display: flex;
+//           flex-direction: column;
+//           min-height: 260px;
+//         }
+//         .card:focus { outline: 2px solid rgba(0,0,0,0.06); }
+//         .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+
+//         .media {
+//           height: 200px;
+//           width: 100%;
+//           background: #f4f4f4;
+//           display: block;
+//           position: relative;
+//         }
+//         .media img {
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//           display: block;
+//           transition: transform 400ms ease;
+//         }
+//         .card:hover .media img {
+//           transform: scale(1.03);
+//         }
+
+//         .meta {
+//           padding: 16px;
+//           text-align: center;
+//           background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,1));
+//         }
+//         .meta-title {
+//           color: var(--muted);
+//           font-size: 14px;
+//           display: block;
+//         }
+
+//         /* Lightbox */
+//         .lightbox-overlay {
+//           position: fixed;
+//           inset: 0;
+//           z-index: 1200;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           background: rgba(6, 6, 6, 0.64);
+//           padding: 28px;
+//         }
+//         .lightbox-inner {
+//           position: relative;
+//           width: min(1200px, 96vw);
+//           height: min(820px, 88vh);
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//         }
+
+//         .lb-media {
+//           width: 100%;
+//           height: 100%;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           background: #0f0f0f;
+//           border-radius: 10px;
+//           overflow: hidden;
+//           position: relative;
+//         }
+
+//         .lb-media img {
+//           max-width: 100%;
+//           max-height: 100%;
+//           object-fit: contain;
+//           display: block;
+//         }
+
+//         .lb-caption {
+//           position: absolute;
+//           bottom: 0;
+//           left: 0;
+//           right: 0;
+//           padding: 12px 18px;
+//           background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.45));
+//           color: #fff;
+//           font-size: 14px;
+//           text-align: center;
+//         }
+
+//         .lb-close {
+//           position: absolute;
+//           top: -8px;
+//           right: -8px;
+//           background: #fff;
+//           width: 40px;
+//           height: 40px;
+//           border-radius: 999px;
+//           border: none;
+//           font-size: 18px;
+//           cursor: pointer;
+//           box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+//         }
+
+//         .lb-nav {
+//           position: absolute;
+//           top: 50%;
+//           transform: translateY(-50%);
+//           width: 58px;
+//           height: 58px;
+//           background: rgba(255,255,255,0.06);
+//           border: none;
+//           color: #fff;
+//           font-size: 34px;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           cursor: pointer;
+//           border-radius: 999px;
+//           backdrop-filter: blur(4px);
+//         }
+//         .lb-prev { left: -28px; }
+//         .lb-next { right: -28px; }
+
+//         @media (max-width: 880px) {
+//           .lightbox-inner { height: 84vh; }
+//           .lb-prev, .lb-next { width: 46px; height: 46px; font-size: 28px; left: 6px; right: 6px; }
+//           .lb-prev { left: 6px; }
+//           .lb-next { right: 6px; }
+//         }
+
+//         @media (max-width: 520px) {
+//           .media { height: 160px; }
+//           .card { min-height: 200px; }
+//           .lightbox-inner { padding: 12px; width: 98vw; height: 78vh; }
+//           .lb-nav { display: none; }
+//         }
+//       `}</style>
+//     </div>
+//   );
+// }
+
+
+
+
 "use client";
 
 import { useEffect, useState } from "react";
