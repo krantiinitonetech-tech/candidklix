@@ -1,19 +1,12 @@
-import admin from "firebase-admin";
+import { initializeApp, getApps, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
-// Only initialize once (prevents re-initialization during hot reload)
-if (!admin.apps.length) {
-  try {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+const svc = process.env.FIREBASE_SERVICE_ACCOUNT_JSON && JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
 
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-    });
-
-    console.log("✅ Firebase Admin initialized successfully");
-  } catch (error) {
-    console.error("❌ Firebase Admin initialization error:", error);
-  }
+if (!global.__firebaseAdmin && !getApps().length) {
+  initializeApp({ credential: cert(svc) });
+  global.__firebaseAdmin = true;
+  console.log("✅ Firebase Admin initialized successfully");
 }
 
-// Export the Firestore admin instance
-export const adminDb = admin.firestore();
+export const adminDb = getFirestore();
