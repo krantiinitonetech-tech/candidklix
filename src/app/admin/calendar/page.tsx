@@ -13,10 +13,10 @@ import type { EventInput } from "@fullcalendar/core";
 export default function CalendarPage() {
   const router = useRouter();
 
-  // authentication state
+  // auth state
   const [authReady, setAuthReady] = useState<boolean>(false);
 
-  // FIXED: typed calendar state
+  // FIXED: typed state
   const [events, setEvents] = useState<EventInput[]>([]);
   const [totalEvents, setTotalEvents] = useState<number>(0);
   const [monthEvents, setMonthEvents] = useState<number>(0);
@@ -30,7 +30,7 @@ export default function CalendarPage() {
     return () => unsub();
   }, [router]);
 
-  // load events
+  // load bookings
   useEffect(() => {
     if (!authReady) return;
 
@@ -40,9 +40,11 @@ export default function CalendarPage() {
       const list: EventInput[] = snap.docs.map((d) => {
         const x = d.data() as any;
 
-        // normalize start date to ISO (required for FullCalendar + TypeScript)
+        // normalize date
         const rawDate = x.eventDate || x.date || "";
-        const isoDate = rawDate ? new Date(rawDate).toISOString() : new Date().toISOString();
+        const isoDate = rawDate
+          ? new Date(rawDate).toISOString()
+          : new Date().toISOString();
 
         return {
           id: d.id,
@@ -56,7 +58,7 @@ export default function CalendarPage() {
       setEvents(list);
       setTotalEvents(list.length);
 
-      // count this month's events
+      // count events this month
       const now = new Date();
       const month = now.getMonth();
       const year = now.getFullYear();
@@ -114,4 +116,3 @@ Notes: ${p.comments || "None"}
     </div>
   );
 }
-
