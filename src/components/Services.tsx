@@ -22,7 +22,7 @@ const SERVICES = [
   { id: "food", title: "Food Photography", desc: "Showcase culinary artistry with stunning imagery that makes every dish irresistibly appetizing.", img: "/images/services/food.jpeg", tone: "tone-peach", ring: "ring-peach" },
 ];
 
-export default function Services(): JSX.Element {
+export default function Services(): React.ReactElement {
   return (
     <section aria-labelledby="services-headings" className="services-roots">
       <div className="services-inners">

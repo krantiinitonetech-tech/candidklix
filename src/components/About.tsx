@@ -2,7 +2,7 @@
 "use client";
 import React from "react";
 
-export default function About(): JSX.Element {
+export default function About(): React.ReactElement {
   return (
     <section aria-labelledby="about-heading" className="about-root">
       <div className="container">

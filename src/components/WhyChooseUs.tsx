@@ -48,7 +48,7 @@ const features = [
   },
 ];
 
-export default function WhyChooseUs(): JSX.Element {
+export default function WhyChooseUs(): React.ReactElement {
   return (
     <section className="why-root" aria-labelledby="why-heading">
       <div className="why-inner">

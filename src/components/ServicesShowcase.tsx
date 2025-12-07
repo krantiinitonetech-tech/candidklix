@@ -58,7 +58,7 @@ const SERVICES: Service[] = [
   },
 ];
 
-export default function ServicesShowcase(): JSX.Element {
+export default function ServicesShowcase(): React.ReactElement {
   return (
     <section className="services-showcase">
       <div className="services-inner">
