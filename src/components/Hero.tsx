@@ -51,7 +51,7 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Hero(): JSX.Element {
+export default function Hero(): React.ReactElement {
   return (
     <section className="hero-figma">
       <div

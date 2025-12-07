@@ -33,7 +33,7 @@ const NAV_LINKS = [
   { label: "Others", href: "/gallery/others" },
 ];
 
-export default function Gallery(): JSX.Element {
+export default function Gallery(): React.ReactElement {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
@@ -157,7 +157,7 @@ export default function Gallery(): JSX.Element {
 //   { label: "Others", href: "/gallery/others" },
 // ];
 
-// export default function Gallery(): JSX.Element {
+// export default function Gallery(): React.ReactElement {
 //   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 //   const images = GALLERY_IMAGES; // static array — no in-place filtering
 

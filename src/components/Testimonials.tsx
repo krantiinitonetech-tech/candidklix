@@ -55,7 +55,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-export default function Testimonials(): JSX.Element {
+export default function Testimonials(): React.ReactElement {
   return (
     <section aria-labelledby="testimonials-heading" className="testimonials-root">
       <div className="testimonials-inner">

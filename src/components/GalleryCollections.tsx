@@ -12,7 +12,7 @@ const COLLECTIONS = [
   { id: "others", title: "Others", desc: "Diverse moments from special occasions", img: "/images/gallery-covers/others.jpeg" },
 ];
 
-export default function GalleryCollections(): JSX.Element {
+export default function GalleryCollections(): React.ReactElement {
   return (
     <main className="collections-root">
       <div className="collections-inner">
