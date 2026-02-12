@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,6 +11,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import type { EventInput } from "@fullcalendar/core";
+const shouldReset = process.env.NEXT_PUBLIC_RESET_BOOKINGS === "1";
 
 export default function CalendarPage() {
   const router = useRouter();
@@ -31,8 +34,6 @@ export default function CalendarPage() {
   useEffect(() => {
     if (!authReady) return;
 
-  const shouldReset =
-  process.env.NEXT_PUBLIC_RESET_BOOKINGS === "1";
 
     if (!shouldReset) return;
 
@@ -61,7 +62,7 @@ export default function CalendarPage() {
       const snap = await getDocs(collection(db, "bookings"));
 
       const list: EventInput[] = snap.docs.map((d) => {
-        const x = d.data() as any;
+const x = d.data() as Record<string, any>;
         const rawDate = x.eventDate || x.date;
         const isoDate = rawDate
           ? new Date(rawDate).toISOString()
