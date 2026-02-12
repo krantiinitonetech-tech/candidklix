@@ -47,8 +47,6 @@ next-env.d.ts
 
 # Secret copies
 env.local.copy
-src/lib/googleTokens.json
 
 # Service account / credentials
 env.local.copy
-src/lib/googleTokens.json
