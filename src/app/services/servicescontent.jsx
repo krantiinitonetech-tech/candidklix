@@ -7,9 +7,7 @@ export default function ServicesContent() {
   return (
     <main>
       {/* Breadcrumb */}
-      <nav aria-label="breadcrumb" className="breadcrumb" style={{ padding: "12px 20px" }}>
-        <Link href="/">Home</Link> <span style={{ margin: "0 8px" }}>›</span> <span>Services</span>
-      </nav>
+    
 
       {/* Page header
       <header className="page-header" style={{ textAlign: "center", padding: "36px 20px 8px" }}>

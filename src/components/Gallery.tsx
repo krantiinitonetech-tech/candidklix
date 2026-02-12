@@ -1,93 +1,179 @@
-// components/Gallery.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-/**
- * Static gallery implementation:
- * - Uses images from /public/images/gallery-static/
- * - Navigation links replace filter chips and route to category pages
- * - "View All" links to /gallery
- *
- * Update STATIC_IMAGES if you use different filenames.
- */
-
 const STATIC_IMAGES = [
-  "/images/gallery-static/img1.jpg",
-  "/images/gallery-static/img2.jpg",
-  "/images/gallery-static/img3.jpg",
-  "/images/gallery-static/img4.jpg",
-  "/images/gallery-static/img5.jpg",
-  "/images/gallery-static/img6.jpg",
-  "/images/gallery-static/img7.jpg",
-  "/images/gallery-static/img8.jpg",
-];
-
-const NAV_LINKS = [
-  { label: "All", href: "/gallery" },
-  { label: "Wedding", href: "/gallery/wedding" },
-  { label: "Baby Shower", href: "/gallery/baby-shower" },
-  { label: "Graduation", href: "/gallery/graduation" },
-  { label: "Food", href: "/gallery/food" },
-  { label: "Others", href: "/gallery/others" },
+"/images/gallery-static/00.jpg",
+"/images/gallery-static/01.jpg",
+"/images/gallery-static/2.jpg",
+"/images/gallery-static/3.jpg",
+"/images/gallery-static/4.jpg",
+"/images/gallery-static/5.jpg",
+"/images/gallery-static/6.jpg",
+"/images/gallery-static/006.jpg",
+"/images/gallery-static/7.jpg",
+"/images/gallery-static/9.jpg",
+"/images/gallery-static/10.jpg",
+"/images/gallery-static/11.jpg",
+"/images/gallery-static/12.jpg",
+"/images/gallery-static/13.jpg",
+"/images/gallery-static/14.jpg",
+"/images/gallery-static/15.jpg",
+"/images/gallery-static/16.jpg",
+"/images/gallery-static/17.jpg",
+"/images/gallery-static/18.jpg",
+"/images/gallery-static/19.jpg",
+"/images/gallery-static/20.jpg",
+"/images/gallery-static/21.jpg",
+"/images/gallery-static/22.jpg",
+"/images/gallery-static/23.jpg",
+"/images/gallery-static/24.jpg",
+"/images/gallery-static/25.jpg",
+"/images/gallery-static/26.jpg",
+"/images/gallery-static/27.jpg",
+"/images/gallery-static/28.jpg",
+"/images/gallery-static/29.jpg",
+"/images/gallery-static/30.jpg",
+"/images/gallery-static/31.jpg",
+"/images/gallery-static/32.jpg",
+"/images/gallery-static/33.jpg",
+"/images/gallery-static/34.jpg",
+"/images/gallery-static/35.jpg",
+"/images/gallery-static/36.jpg",
+"/images/gallery-static/37.jpg",
+"/images/gallery-static/38.jpg",
+"/images/gallery-static/39.jpg",
+"/images/gallery-static/40.jpg",
+"/images/gallery-static/41.jpg",
+"/images/gallery-static/42.jpg",
+"/images/gallery-static/43.jpg",
+"/images/gallery-static/44.jpg",
+"/images/gallery-static/45.jpg",
+"/images/gallery-static/46.jpg",
+"/images/gallery-static/47.jpg",
+"/images/gallery-static/48.jpg",
+"/images/gallery-static/49.jpg",
+"/images/gallery-static/50.jpg",
+"/images/gallery-static/51.jpg",
+"/images/gallery-static/52.jpg",
 ];
 
 export default function Gallery(): React.ReactElement {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  /* ---------- AUTO SLIDE ---------- */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (sliderRef.current) {
+        sliderRef.current.scrollBy({
+          left: 300,
+          behavior: "smooth",
+        });
+
+        // loop back
+        if (
+          sliderRef.current.scrollLeft + sliderRef.current.clientWidth >=
+          sliderRef.current.scrollWidth
+        ) {
+          sliderRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        }
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  /* ---------- KEYBOARD NAVIGATION ---------- */
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+
+      if (e.key === "ArrowRight") {
+        setLightboxIndex(
+          (prev) => ((prev! + 1) % STATIC_IMAGES.length)
+        );
+      }
+
+      if (e.key === "ArrowLeft") {
+        setLightboxIndex(
+          (prev) =>
+            (prev! - 1 + STATIC_IMAGES.length) %
+            STATIC_IMAGES.length
+        );
+      }
+
+      if (e.key === "Escape") {
+        setLightboxIndex(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [lightboxIndex]);
+
+  const scrollLeft = () => {
+    sliderRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    sliderRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+  };
 
   return (
-    <section aria-labelledby="gallery-heading" className="gallery-root">
+    <section className="gallery-root">
       <div className="gallery-inner">
-        <header className="gallery-header">
-          <h2 id="gallery-heading">Our Gallery</h2>
-          <p className="gallery-sub">Explore our collection of captured moments</p>
+     
 
-          <nav className="gallery-nav" aria-label="Gallery navigation">
-            {NAV_LINKS.map((n) => (
-              <Link key={n.href} href={n.href} className="nav-link">
-                {n.label}
-              </Link>
-            ))}
-          </nav>
-        </header>
+        {/* ---------- SLIDER ---------- */}
+        <div className="slider-wrapper">
+          <button className="slider-arrow left" onClick={scrollLeft}>
+            ‹
+          </button>
 
-        <div className="gallery-grid" role="list">
-          {STATIC_IMAGES.map((src, idx) => (
-            <button
-              key={src}
-              className="gallery-tile"
-              onClick={() => setLightboxIndex(idx)}
-              aria-label={`Open image ${idx + 1}`}
-              role="listitem"
-            >
-              <div className="gallery-media">
+          <div className="gallery-slider" ref={sliderRef}>
+            {STATIC_IMAGES.map((src, idx) => (
+              <button
+                key={src}
+                className="slider-tile"
+                onClick={() => setLightboxIndex(idx)}
+              >
                 <Image
                   src={src}
-                  alt={`Gallery image ${idx + 1}`}
+                  alt={`Gallery ${idx + 1}`}
                   fill
-                  style={{ objectFit: "cover", objectPosition: "center" }}
-                  priority={idx < 4} // priority for the first row
+                  style={{ objectFit: "cover" }}
                 />
-              </div>
-            </button>
-          ))}
-        </div>
+              </button>
+            ))}
+          </div>
 
-        <div className="gallery-cta-wrap">
-          <Link href="/gallery" className="btn btn--mint">View All</Link>
+          <button className="slider-arrow right" onClick={scrollRight}>
+            ›
+          </button>
         </div>
       </div>
 
-      {/* Lightbox (simple) */}
+      {/* ---------- LIGHTBOX ---------- */}
       {lightboxIndex !== null && (
-        <div className="lightbox" role="dialog" aria-modal="true">
-          <button className="lightbox-close" onClick={() => setLightboxIndex(null)} aria-label="Close">✕</button>
+        <div className="lightbox">
+          <button
+            className="lightbox-close"
+            onClick={() => setLightboxIndex(null)}
+          >
+            ✕
+          </button>
 
           <button
             className="lightbox-prev"
-            onClick={() => setLightboxIndex(i => (i! - 1 + STATIC_IMAGES.length) % STATIC_IMAGES.length)}
-            aria-label="Previous"
+            onClick={() =>
+              setLightboxIndex(
+                (i) =>
+                  (i! - 1 + STATIC_IMAGES.length) %
+                  STATIC_IMAGES.length
+              )
+            }
           >
             ‹
           </button>
@@ -95,7 +181,7 @@ export default function Gallery(): React.ReactElement {
           <div className="lightbox-content">
             <Image
               src={STATIC_IMAGES[lightboxIndex]}
-              alt={`Gallery image ${lightboxIndex + 1}`}
+              alt="Selected"
               fill
               style={{ objectFit: "contain" }}
             />
@@ -103,8 +189,11 @@ export default function Gallery(): React.ReactElement {
 
           <button
             className="lightbox-next"
-            onClick={() => setLightboxIndex(i => (i! + 1) % STATIC_IMAGES.length)}
-            aria-label="Next"
+            onClick={() =>
+              setLightboxIndex(
+                (i) => (i! + 1) % STATIC_IMAGES.length
+              )
+            }
           >
             ›
           </button>
@@ -113,6 +202,123 @@ export default function Gallery(): React.ReactElement {
     </section>
   );
 }
+
+
+// // components/Gallery.tsx Working
+// "use client";
+// import React, { useState } from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+
+// /**
+//  * Static gallery implementation:
+//  * - Uses images from /public/images/gallery-static/
+//  * - Navigation links replace filter chips and route to category pages
+//  * - "View All" links to /gallery
+//  *
+//  * Update STATIC_IMAGES if you use different filenames.
+//  */
+
+// const STATIC_IMAGES = [
+//   "/images/gallery-static/img1.jpg",
+//   "/images/gallery-static/img2.jpg",
+//   "/images/gallery-static/img3.jpg",
+//   "/images/gallery-static/img4.jpg",
+//   "/images/gallery-static/img5.jpg",
+//   "/images/gallery-static/img6.jpg",
+//   "/images/gallery-static/img7.jpg",
+//   "/images/gallery-static/img8.jpg",
+// ];
+
+// const NAV_LINKS = [
+//   { label: "All", href: "/gallery" },
+//   { label: "Wedding", href: "/gallery/wedding" },
+//   { label: "Baby Shower", href: "/gallery/baby-shower" },
+//   { label: "Graduation", href: "/gallery/graduation" },
+//   { label: "Food", href: "/gallery/food" },
+//   { label: "Others", href: "/gallery/others" },
+// ];
+
+// export default function Gallery(): React.ReactElement {
+//   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+//   return (
+//     <section aria-labelledby="gallery-heading" className="gallery-root">
+//       <div className="gallery-inner">
+//         <header className="gallery-header">
+//           <h2 id="gallery-heading">Our Gallery</h2>
+//           <p className="gallery-sub">Explore our collection of captured moments</p>
+
+//           <nav className="gallery-nav" aria-label="Gallery navigation">
+//             {NAV_LINKS.map((n) => (
+//               <Link key={n.href} href={n.href} className="nav-link">
+//                 {n.label}
+//               </Link>
+//             ))}
+//           </nav>
+//         </header>
+
+//         <div className="gallery-grid" role="list">
+//           {STATIC_IMAGES.map((src, idx) => (
+//             <button
+//               key={src}
+//               className="gallery-tile"
+//               onClick={() => setLightboxIndex(idx)}
+//               aria-label={`Open image ${idx + 1}`}
+//               role="listitem"
+//             >
+//               <div className="gallery-media">
+//                 <Image
+//                   src={src}
+//                   alt={`Gallery image ${idx + 1}`}
+//                   fill
+//                   style={{ objectFit: "cover", objectPosition: "center" }}
+//                   priority={idx < 4} // priority for the first row
+//                 />
+//               </div>
+//             </button>
+//           ))}
+//         </div>
+
+//         <div className="gallery-cta-wrap">
+//           <Link href="/gallery" className="btn btn--mint">View All</Link>
+//         </div>
+//       </div>
+
+//       {/* Lightbox (simple) */}
+//       {lightboxIndex !== null && (
+//         <div className="lightbox" role="dialog" aria-modal="true">
+//           <button className="lightbox-close" onClick={() => setLightboxIndex(null)} aria-label="Close">✕</button>
+
+//           <button
+//             className="lightbox-prev"
+//             onClick={() => setLightboxIndex(i => (i! - 1 + STATIC_IMAGES.length) % STATIC_IMAGES.length)}
+//             aria-label="Previous"
+//           >
+//             ‹
+//           </button>
+
+//           <div className="lightbox-content">
+//             <Image
+//               src={STATIC_IMAGES[lightboxIndex]}
+//               alt={`Gallery image ${lightboxIndex + 1}`}
+//               fill
+//               style={{ objectFit: "contain" }}
+//             />
+//           </div>
+
+//           <button
+//             className="lightbox-next"
+//             onClick={() => setLightboxIndex(i => (i! + 1) % STATIC_IMAGES.length)}
+//             aria-label="Next"
+//           >
+//             ›
+//           </button>
+//         </div>
+//       )}
+//     </section>
+//   );
+// }
 
 
 

@@ -1,3 +1,19 @@
+"use client";
+import React from "react";
+
+export default function Hero(): React.ReactElement {
+  return (
+    <section className="hero-figma">
+      <div
+        className="hero-figma__bg"
+        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+        aria-hidden
+      />
+      <div className="hero-figma__overlay" aria-hidden />
+    </section>
+  );
+}
+
 // src/components/Hero.jsx
 // import Link from "next/link";
 
@@ -46,39 +62,40 @@
 // }
 
 
+//Working Hero section
+// "use client";
+// import Link from "next/link";
+// import React from "react";
 
-"use client";
-import Link from "next/link";
-import React from "react";
+// export default function Hero(): React.ReactElement {
+//   return (
+//     <section className="hero-figma">
+//       <div
+//         className="hero-figma__bg"
+//         style={{ backgroundImage: "url('/images/hero.jpg')" }}
+//         aria-hidden
+//       />
+//       <div className="hero-figma__overlay" aria-hidden />
+//       <div className="hero-figma__content">
+//         <h1 className="hero-figma__title">
+//           Capture Life's Greatest
+//           <br />
+//           Moments with CandidKlix
+//           <br />
+//           Photography
+//         </h1>
 
-export default function Hero(): React.ReactElement {
-  return (
-    <section className="hero-figma">
-      <div
-        className="hero-figma__bg"
-        style={{ backgroundImage: "url('/images/hero.jpg')" }}
-        aria-hidden
-      />
-      <div className="hero-figma__overlay" aria-hidden />
-      <div className="hero-figma__content">
-        <h1 className="hero-figma__title">
-          Capture Life's Greatest
-          <br />
-          Moments with CandidKlix
-          <br />
-          Photography
-        </h1>
+//         <p className="hero-figma__sub">
+//           Timeless elegance meets authentic storytelling. We preserve your most
+//           precious memories with artistry and heart.
+//         </p>
 
-        <p className="hero-figma__sub">
-          Timeless elegance meets authentic storytelling. We preserve your most
-          precious memories with artistry and heart.
-        </p>
+//         <div className="hero-figma__ctas">
+//           <Link href="/portfolio" className="btn btn--rose">View Portfolio</Link>
+//           <Link href="/contact" className="btn btn--violet">Book Your Shoot Today</Link>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
-        <div className="hero-figma__ctas">
-          <Link href="/portfolio" className="btn btn--rose">View Portfolio</Link>
-          <Link href="/contact" className="btn btn--violet">Book Your Shoot Today</Link>
-        </div>
-      </div>
-    </section>
-  );
-}

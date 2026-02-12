@@ -307,7 +307,16 @@ export async function GET(request, context) {
       viewUrl: `https://drive.google.com/uc?export=view&id=${f.id}`,
     }));
 
-    return new Response(JSON.stringify({ category: cat.title, files }), { status: 200 });
+return new Response(
+  JSON.stringify({
+    id: cat.id,
+    title: cat.title,
+    tagline: cat.tagline,
+    description: cat.description,
+    files
+  }),
+  { status: 200 }
+);
   } catch (error) {
     console.error("🔥 Error in category fetch:", error);
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });

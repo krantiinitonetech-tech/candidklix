@@ -1,9 +1,11 @@
 // server component: src/app/terms/page.jsx
-export default function TermsPage() {
-  const updated = "December 2025";
+// import Breadcrumb from "@/components/Breadcrumb";
 
+export default function TermsPage() {
+    const updated = "December 2025";
   return (
     <main className="terms-root">
+      {/* <Breadcrumb items={[{ href: "/terms", label: "Terms & Conditions" }]} /> */}
       <header className="terms-hero">
         <div className="container">
           <h1 className="terms-title">Terms & Conditions</h1>
@@ -27,6 +29,9 @@ export default function TermsPage() {
             <li><a href="#privacy">Privacy & data</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <div>
+            
+          </div>
         </nav>
 
         <article className="terms-article">
@@ -75,13 +80,9 @@ export default function TermsPage() {
             </address>
           </section>
         </article>
-      </div>
+<div></div>
 
-      <footer className="terms-foot">
-        <div className="container">
-          <p>© {new Date().getFullYear()} CandidKlix. All rights reserved.</p>
-        </div>
-      </footer>
+      </div>
     </main>
   );
 }

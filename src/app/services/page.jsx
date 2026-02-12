@@ -4,6 +4,9 @@ import ServicesContent from "./servicescontent";
 import ServicesShowcase from "@/components/ServicesShowcase";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CaptureSection from '@/components/CaptureSection';
+import Breadcrumb from "@/components/Breadcrumb";
+
+
 
 export const metadata = {
   title: "Services - CandidKlix",
@@ -13,6 +16,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
+      <Breadcrumb items={[{ href: "/services", label: "Services" }]} />
       <ServicesContent />
       <ServicesShowcase />
       <WhyChooseUs />

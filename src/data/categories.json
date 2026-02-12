@@ -2,26 +2,34 @@
   {
     "id": "wedding",
     "title": "Wedding",
-    "folderId": "1JDYdnsYcyQTcNVHddWaFkTijEXKpZrNF",
-    "type": "photo"
+    "folderId": "14ogZMJB1GgwbYC3nXRKynSRtpJFUolmu",
+    "type": "photo",
+    "tagline": "Timeless vows, beautifully captured.",
+    "description": "From intimate ceremonies to grand celebrations, we preserve every emotion, detail, and unforgettable moment of your wedding day."
   },
   {
     "id": "baby-shower",
     "title": "Baby Shower",
-    "folderId": "1xdxLr-YMsNqDb1fSAxLae_QO3_yRgImv",
-    "type": "photo"
+    "folderId": "1o3Ksvxh0x2fcbNNyByUHwsjrOiEH2en4",
+    "type": "photo",
+    "tagline": "Sweet beginnings, lovingly captured.",
+    "description": "From joyful laughter to heartfelt blessings, we capture the warmth, excitement, and tender moments that celebrate the arrival of your little one."
   },
   {
     "id": "graduation",
     "title": "Graduation",
-    "folderId": "1uXnrrFm2Fo008n5F8Mj8pky5SborUBOI",
-    "type": "photo"
+    "folderId": "1VEEbV-RwM8ck1UWxIRY6n0H0siMugI8f",
+    "type": "photo",
+    "tagline": "Celebrating milestones with pride.",
+    "description": "Your achievement deserves to be remembered. We capture the joy, pride, and excitement of your graduation day."
   },
   {
-    "id": "food photography",
-    "title": "Food Photography",
-    "folderId": "1LopRfIwni5VhmOWQ2DTbLs8GYCV_mAFy",
-    "type": "photo"
+    "id": "food",
+    "title": "Food",
+    "folderId": "17xpXK_xXaoIATbYibSOmsgehZmvGFv65",
+    "type": "photo",
+    "tagline": "Culinary artistry in every frame.",
+    "description": "We highlight textures, colors, and details that bring your culinary creations to life."
   },
   {
     "id": "others",
@@ -30,3 +38,7 @@
     "type": "photo"
   }
 ]
+
+
+    
+ 

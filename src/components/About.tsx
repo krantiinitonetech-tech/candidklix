@@ -1,6 +1,8 @@
 // components/About.tsx
 "use client";
 import React from "react";
+import Image from "next/image";
+
 
 export default function About(): React.ReactElement {
   return (
@@ -13,34 +15,27 @@ export default function About(): React.ReactElement {
 
             <div className="about-paragraphs">
               <p>
-                Founded with a passion for preserving life's most meaningful moments,
-                CandidKlix Photography brings together artistic vision and authentic emotion.
-              </p>
-
-              <p>
-                We believe every photograph tells a story—your story. From intimate weddings to joyful
-                celebrations, our team captures the essence of your special occasions with elegance and care.
-              </p>
-
-              <p>
-                With years of experience and a commitment to excellence, we create timeless images that
-                you'll treasure for generations.
-              </p>
+               At Candid Klix, capturing memories isn’t just what we do — it’s Who we are?
+Our journey began in 2012, sparked by a simple Sony Cyber-shot and a deep love for freezing moments that can never be recreated.
+We don’t see photography as a business. For us, it’s about real emotions, genuine connections, and stories unfolding naturally. Every click is guided by honesty, warmth, and an artistic eye that values moments as they happen — unscripted and true.
+With an eye for detail and a deep respect for authenticity, we document moments as they unfold — gracefully, naturally, and beautifully. Our purpose is simple yet profound to transform fleeting moments into enduring memories, captured with warmth, artistry, and soul because the moments that matter most deserve to be captured beautifully — and remembered forever.
+</p>
             </div>
           </div>
 
           {/* Right: Card */}
-          <aside className="about-card-wrap" aria-hidden>
-            <div className="about-card">
-              <svg className="card-icon" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h2.5l1.2-1.8A1.5 1.5 0 0 1 10.3 2h3.4a1.5 1.5 0 0 1 1.1.7L16 5h2.5A2.5 2.5 0 0 1 21 7.5v8A2.5 2.5 0 0 1 18.5 18H5.5A2.5 2.5 0 0 1 3 15.5v-8z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="12" cy="12.25" r="3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+         {/* Right: Image replacing the card */}
+<aside className="about-card-wrap" aria-hidden>
+  <div className="about-image-card">
+    <Image
+      src="/about-couple.jpg"   // <-- Put your image in /public and update filename
+      alt="CandidKlix Photography"
+      width={520}
+      height={420}
+      className="about-image"/>
+  </div>
+</aside>
 
-              <h3 className="card-title">CandidKlix</h3>
-              <p className="card-sub">Where Moments Become Memories</p>
-            </div>
-          </aside>
         </div>
       </div>
     </section>

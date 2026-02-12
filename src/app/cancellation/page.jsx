@@ -1,9 +1,13 @@
 // server component: src/app/cancellation/page.jsx
+// import Breadcrumb from "@/components/Breadcrumb";
+
 export default function CancellationPage() {
   const updated = "December 2025";
 
   return (
     <main className="terms-root">
+          {/* <Breadcrumb items={[{ href: "/cancellation", label: "Cancellation Policy" }]} /> */}
+
       <header className="terms-hero">
         <div className="container">
           <h1 className="terms-title">Cancellation Policy</h1>

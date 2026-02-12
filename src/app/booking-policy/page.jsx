@@ -1,9 +1,15 @@
 // server component: src/app/booking/page.jsx
-export default function BookingPage() {
+
+// import Breadcrumb from "@/components/Breadcrumb";
+
+export default function BookingPolicy() {
+      
+
   const updated = "December 2025";
 
   return (
     <main className="terms-root">
+      {/* <Breadcrumb items={[{ href: "/booking-policy", label: "Booking Policy" }]} /> */}
       {/* HERO */}
       <header className="terms-hero">
         <div className="container">

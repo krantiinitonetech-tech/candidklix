@@ -1,9 +1,12 @@
 // server component: src/app/privacy/page.jsx
+// import Breadcrumb from "@/components/Breadcrumb";
+
 export default function PrivacyPage() {
   const updated = "December 2025";
 
   return (
     <main className="terms-root">
+    {/* <Breadcrumb items={[{ href: "/privacy", label: "Privacy" }]} /> */}
       {/* HERO */}
       <header className="terms-hero">
         <div className="container">

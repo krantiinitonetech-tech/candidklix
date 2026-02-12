@@ -76,7 +76,7 @@ export default function AdminLogin() {
   // If already logged in → redirect
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) router.push("/admin/calender");
+      if (user) router.push("/admin/calendar");
     });
     return () => unsub();
   }, [router]);
@@ -92,34 +92,118 @@ export default function AdminLogin() {
       setError("Invalid credentials");
     }
   };
+return (
+  <>
+    <div className="admin-page">
+      <div className="admin-center">
+        <div className="admin-box">
+          <h1 className="admin-title">Admin Dashboard</h1>
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-6">Admin Login</h1>
+          <form onSubmit={handleLogin} className="admin-form">
+            <div className="form-group">
+              <label>Admin Email</label>
+              <input
+                type="email"
+                placeholder="Enter admin email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-      <form onSubmit={handleLogin} className="bg-white p-6 shadow rounded w-80 space-y-4">
-        <input
-          type="email"
-          className="w-full p-2 border rounded"
-          placeholder="Admin Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-        <input
-          type="password"
-          className="w-full p-2 border rounded"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            {error && <p className="error-text">{error}</p>}
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-
-        <button className="w-full bg-blue-600 text-white p-2 rounded font-medium">
-          Login
-        </button>
-      </form>
+            <button type="submit" className="login-btn">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  );
+
+    <style jsx>{`
+      .admin-page {
+        background: #f4f1ec;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .admin-center {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .admin-box {
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+      }
+
+      .admin-title {
+        font-family: serif;
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: #222;
+      }
+
+      .admin-form {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .form-group label {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .form-group input {
+        padding: 14px;
+        border: none;
+        background: #eaeaea;
+        font-size: 14px;
+      }
+
+      .login-btn {
+        margin-top: 10px;
+        padding: 12px;
+        background: #5a5a5a;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s ease;
+      }
+
+      .login-btn:hover {
+        background: #444;
+      }
+
+      .error-text {
+        color: red;
+        font-size: 13px;
+      }
+    `}</style>
+  </>
+);
+
 }

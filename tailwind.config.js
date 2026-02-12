@@ -22,7 +22,9 @@ module.exports = {
         figmaSoft: "0 8px 24px rgba(2,6,23,0.06)",
       },
       fontFamily: {
-        inter: ["Inter", "ui-sans-serif", "system-ui"],
+        heading: ["Plus Jakarta Sans", "Inter", "system-ui"],
+  body: ["Inter", "ui-sans-serif", "system-ui"],
+  inter: ["Inter","system-ui"]
       },
     },
   },
