@@ -31,10 +31,8 @@ export default function CalendarPage() {
   useEffect(() => {
     if (!authReady) return;
 
-    const shouldReset =
-      process?.env?.NEXT_PUBLIC_RESET_BOOKINGS === "1" ||
-      (typeof window !== "undefined" &&
-        window?.__NEXT_DATA__?.env?.NEXT_PUBLIC_RESET_BOOKINGS === "1");
+  const shouldReset =
+  process.env.NEXT_PUBLIC_RESET_BOOKINGS === "1";
 
     if (!shouldReset) return;
 
