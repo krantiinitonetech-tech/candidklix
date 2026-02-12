@@ -25,7 +25,9 @@ export default function HomePage() {
       <About />
       <Philosophy />
       <Gallery />
-      <Services />
+      <section id="services" className="your-services-class">
+<Services /></section>
+      
       <Philosophy2 />
       <Testimonials />
     </div>

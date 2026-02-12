@@ -123,10 +123,10 @@ export default function AboutPage() {
           }
           .approach-card {
             background: #f7f7f7;
-            border-radius: 14px;
             padding: 40px;
             text-align: center;
             box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+           align-content: center;
           }
           .approach-card .muted {
             color: #666;

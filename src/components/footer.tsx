@@ -38,7 +38,6 @@ export default function Footer() {
             <li><Link href="/about">About Us</Link></li>
             <li><Link href="/services">Services</Link></li>
             <li><Link href="/gallery">Gallery</Link></li>
-            <li><Link href="/testimonials">Testimonials</Link></li>
           </ul>
         </div>
 
@@ -58,11 +57,11 @@ export default function Footer() {
           <h3 className="footer-heading">Contact Us</h3>
 
           <ul className="footer-list">
-            <li>📞 (555) 123-4567</li>
+            <li>📞  (+1) 816-590-2011</li>
             <li>
-              ✉️ <a href="mailto:hello@candidklix.com">hello@candidklix.com</a>
+              ✉️ <a href="mailto:candidklixphotography@gmail.com">hello@candidklix.com</a>
             </li>
-            <li>📍 123 Photography Lane, Studio City, CA 90001</li>
+            <li>📍DMV Area</li>
           </ul>
 
           {/* Social Media Section */}

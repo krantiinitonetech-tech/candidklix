@@ -357,7 +357,7 @@ background: #252323;
 
 /* Footer Wrapper */
 .footer-wrapper {
-  background: #000000;
+  background: #1f2220;
   border-radius: 18px 18px 0 0;
   padding-top: 48px;
 }
@@ -427,6 +427,7 @@ background: #252323;
   max-width: 300px;
   font-size: 16px;
   line-height: 1.6;
+  color: #ffffff;
 }
 
 /* Headings */
@@ -518,7 +519,7 @@ background: #252323;
 .brand-row { display:flex; align-items:center; gap:12px; }
 .logo-badge { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg,var(--logo-accent), #FF6B8F); color:#fff; font-weight:700; font-size:16px; }
 .logo-main { font-weight:700; font-size:18px; color:var(--text-primary); }
-.brand-desc { margin-top:20px; font-size:var(--figma-body-size); color:var(--text-body); line-height:1.6; max-width:320px;color: #ffffff; }
+/* .brand-desc { margin-top:20px; font-size:var(--figma-body-size); color:var(--text-body); line-height:1.6; max-width:320px;color: #ffffff; } */
 
 /* lists */
 .figma-list, .figma-contact { list-style:none; padding:0; margin:0; }
@@ -567,7 +568,7 @@ background: #252323;
 .brand-row { display:flex; align-items:center; gap:12px; }
 .logo-badge { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg,var(--logo-accent), #FF6B8F); color:#fff; font-weight:700; font-size:16px; }
 .logo-main { font-weight:700; font-size:18px; color:var(--text-primary); }
-.brand-desc { margin-top:20px; font-size:var(--figma-body-size); color:var(--text-body); line-height:1.6; max-width:320px; }
+/* .brand-desc { margin-top:20px; font-size:var(--figma-body-size); color:var(--text-body); line-height:1.6; max-width:320px; } */
 
 /* lists */
 .figma-list, .figma-contact { list-style:none; padding:0; margin:0; }
@@ -807,6 +808,7 @@ background: #252323;
   font-size: 42px;
   margin-bottom: 50px;
   color: #222;
+  font-weight: 500;
 }
 
 /* GRID */
@@ -1064,6 +1066,8 @@ background: #252323;
   font-size: 40px;
   margin-bottom: 60px;
   color: #222;
+    font-weight: 500;
+
 }
 /* Hide image on mobile */
 @media (max-width: 999px) {

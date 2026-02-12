@@ -32,9 +32,9 @@ export default function Header() {
         <nav className={`main-nav ${open ? "open" : ""}`}>
           <Link href="/" className="nav-link">Home</Link>
           <Link href="/about" className="nav-link">About</Link>
-          <Link href="/services" className="nav-link">Services</Link>
+          <Link href="/#services" className="nav-link">Services</Link>
           <Link href="/gallery" className="nav-link">Gallery</Link>
-          <Link href="/contact" className="nav-link">Contact</Link>
+          <Link href="/booking" className="nav-link">Contact</Link>
         </nav>
 
         <div className="actions">
@@ -62,7 +62,7 @@ export default function Header() {
         >
           <Link href="/" className="mobile-link">Home</Link>
           <Link href="/about" className="mobile-link">About</Link>
-          <Link href="/services" className="mobile-link">Services</Link>
+          <Link href="/#services" className="mobile-link">Services</Link>
           <Link href="/gallery" className="mobile-link">Gallery</Link>
           <Link href="/contact" className="mobile-link">Contact</Link>
           <Link href="/booking" className="mobile-cta">Book Session</Link>
