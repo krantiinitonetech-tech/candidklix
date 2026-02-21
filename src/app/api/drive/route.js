@@ -352,25 +352,68 @@
 //   }
 // }
 
-import { google } from "googleapis";
-import fs from "fs";
-import path from "path";
+// import { google } from "googleapis";
+// import fs from "fs";
+// import path from "path";
 
-const tokenPath = path.join(process.cwd(), "src/lib/googleTokens.json");
+// const tokenPath = path.join(process.cwd(), "src/lib/googleTokens.json");
+
+// export async function GET() {
+//   try {
+//     if (!fs.existsSync(tokenPath)) {
+//       return new Response("❌ Google tokens not found", { status: 401 });
+//     }
+
+//     const tokens = JSON.parse(fs.readFileSync(tokenPath, "utf8"));
+//     const oauth2Client = new google.auth.OAuth2(
+//       process.env.GOOGLE_CLIENT_ID,
+//       process.env.GOOGLE_CLIENT_SECRET,
+//       process.env.GOOGLE_REDIRECT_URI
+//     );
+//     oauth2Client.setCredentials(tokens);
+
+//     const drive = google.drive({ version: "v3", auth: oauth2Client });
+
+//     const q = `'${process.env.GOOGLE_FOLDER_ID}' in parents and mimeType contains 'image/'`;
+
+//     const res = await drive.files.list({
+//       q,
+//       fields: "files(id,name,mimeType,thumbnailLink,webViewLink)",
+//       supportsAllDrives: true,
+//     });
+
+//     const files = (res.data.files || []).map(f => ({
+//       id: f.id,
+//       name: f.name,
+//       mimeType: f.mimeType,
+//       viewUrl: `https://drive.google.com/uc?export=view&id=${f.id}`,
+//       downloadUrl: `https://drive.google.com/uc?export=download&id=${f.id}`
+//     }));
+
+//     return new Response(JSON.stringify({ files }), { status: 200 });
+//   } catch (error) {
+//     console.error(error);
+//     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+//   }
+// }
+
+
+// Latest code
+
+import { google } from "googleapis";
 
 export async function GET() {
   try {
-    if (!fs.existsSync(tokenPath)) {
-      return new Response("❌ Google tokens not found", { status: 401 });
-    }
-
-    const tokens = JSON.parse(fs.readFileSync(tokenPath, "utf8"));
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.GOOGLE_REDIRECT_URI
     );
-    oauth2Client.setCredentials(tokens);
+
+    // ✅ Use refresh token instead of file
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    });
 
     const drive = google.drive({ version: "v3", auth: oauth2Client });
 
@@ -391,6 +434,7 @@ export async function GET() {
     }));
 
     return new Response(JSON.stringify({ files }), { status: 200 });
+
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
