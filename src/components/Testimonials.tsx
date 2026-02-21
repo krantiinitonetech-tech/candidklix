@@ -3,6 +3,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const TESTIMONIALS = [
+   {
+    name: "Nimesh & Hiral Parekh",
+    image: "/images/testimonials/test2.png",
+    text: `If you’re overwhelmed with choices, our advice is simple — stop searching. Pradeep and Vinay are the team you want.
+From our son’s wedding to every celebration that followed, their photos and films were beautifully timed and thoughtfully captured.
+They were clear, communicative, fun, and professional while still feeling like family. We couldn’t have asked for a better experience.`,
+  },
+  
   {
     name: "Ganesh & Neelima",
     image: "/images/testimonials/test1.png",
@@ -10,13 +18,7 @@ const TESTIMONIALS = [
 They even stayed longer than planned, simply to ensure every moment we hoped for was beautifully captured. Pradeep and the team’s kindness, patience, and professionalism made the entire experience seamless and stress-free.
 We are truly grateful for their dedication and care, and we cannot wait to relive our day through the final photos and films. We wholeheartedly recommend Candid Klix to any couple looking for a team that genuinely goes the extra mile to capture every moment with heart and elegance.`,
   },
-  {
-    name: "Nimesh & Hiral Parekh",
-    image: "/images/testimonials/test2.png",
-    text: `If you’re overwhelmed with choices, our advice is simple — stop searching. Pradeep and Vinay are the team you want.
-From our son’s wedding to every celebration that followed, their photos and films were beautifully timed and thoughtfully captured.
-They were clear, communicative, fun, and professional while still feeling like family. We couldn’t have asked for a better experience.`,
-  },
+ 
   {
     name: "Sonia Khurmi",
     image: "/images/testimonials/test3.png",

@@ -53,7 +53,10 @@ h2{font-family:var(--font-heading); font-size:var(--fs-h2); font-weight:700;}
 h3{font-family:var(--font-heading); font-size:var(--fs-h3); font-weight:600;}
 h4{font-family:var(--font-heading); font-size:var(--fs-h4); font-weight:600;}
 p{font-family:var(--font-body); font-size:var(--fs-body); line-height:1.7; margin:0 0 1em;}
-.small{font-size:var(--fs-small);}
+.small{font-size:var(--fs-small);
+  position: relative;
+}
+
 
 /* --------------------------
    Font defaults (next/font injects --font-body / --font-heading on <html>)
@@ -979,8 +982,8 @@ background: #252323;
   font-size: 22px;
 }
 
-.slider-arrow.left { left: -10px; }
-.slider-arrow.right { right: -10px; }
+.slider-arrow.left { left: 10px; }
+.slider-arrow.right { right: 10px; }
 
 /* responsive */
 @media (max-width: 768px) {
@@ -1484,6 +1487,10 @@ background: #252323;
   max-width: 420px;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
 
 /* Booking form styles  */
 

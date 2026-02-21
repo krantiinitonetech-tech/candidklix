@@ -59,44 +59,66 @@ export default function Footer() {
           <ul className="footer-list">
             <li>📞  (+1) 816-590-2011</li>
             <li>
-              ✉️ <a href="mailto:candidklixphotography@gmail.com">hello@candidklix.com</a>
+              ✉️ <a href="mailto:candidklixphotography@gmail.com">candidklixphotography@gmail.com</a>
             </li>
             <li>📍DMV Area</li>
           </ul>
 
           {/* Social Media Section */}
-          <div className="social-media">
-            <h4 className="footer-heading" style={{ marginTop: "1rem" }}>Connect With Us</h4>
+     {/* Social Media Section */}
+<div className="social-media">
+  <h4 className="footer-heading" style={{ marginTop: "1rem" }}>
+    Connect With Us
+  </h4>
 
-            <a
-              href="https://www.instagram.com/candid_klicks_photography/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-              style={{ display: "inline-block", marginTop: "0.6rem" }}
-              aria-label="Instagram"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 48 48">
-                <defs>
-                  <linearGradient id="IGgradient" x1="0" x2="1" y1="1" y2="0">
-                    <stop offset="0%" stopColor="#f58529" />
-                    <stop offset="25%" stopColor="#feda77" />
-                    <stop offset="50%" stopColor="#dd2a7b" />
-                    <stop offset="75%" stopColor="#8134af" />
-                    <stop offset="100%" stopColor="#515bd4" />
-                  </linearGradient>
-                </defs>
+  <div className="social-row" style={{ marginTop: "0.8rem" }}>
+    
+    {/* Instagram */}
+    <a
+      href="https://www.instagram.com/candid_klicks_photography/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+      style={{ display: "flex", width: 48, height: 48 }}
+    >
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <defs>
+          <linearGradient id="igGrad" x1="0" x2="1" y1="1" y2="0">
+            <stop offset="0%" stopColor="#f58529" />
+            <stop offset="25%" stopColor="#feda77" />
+            <stop offset="50%" stopColor="#dd2a7b" />
+            <stop offset="75%" stopColor="#8134af" />
+            <stop offset="100%" stopColor="#515bd4" />
+          </linearGradient>
+        </defs>
+        <rect width="48" height="48" rx="12" fill="url(#igGrad)" />
+        <path
+          fill="#fff"
+          d="M24 15c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 15c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+        />
+      </svg>
+    </a>
 
-                <rect width="48" height="48" rx="12" fill="url(#IGgradient)" />
-                <path
-                  fill="#fff"
-                  d="M24 15c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 15c-3.3 0-6-2.7-6-6s2.7-6 6-6
-               6 2.7 6 6-2.7 6-6 6zm7-16.5c0 1.2-1 2.2-2.2 2.2-1.2 0-2.2-1-2.2-2.2s1-2.2
-               2.2-2.2c1.2 0 2.2 1 2.2 2.2z"
-                />
-              </svg>
-            </a>
-          </div>
+    {/* Facebook */}
+    <a
+      href="https://www.facebook.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Facebook"
+      style={{ display: "flex", width: 48, height: 48 }}
+    >
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <rect width="48" height="48" rx="12" fill="#1877F2"/>
+        <path
+          fill="#fff"
+          d="M28 24h3l1-4h-4v-2c0-1 .4-2 2-2h2v-4h-3c-4 0-6 2-6 6v2h-3v4h3v12h5V24z"
+        />
+      </svg>
+    </a>
+
+  </div>
+</div>
+
         </div>
       </div>
 
