@@ -14,7 +14,8 @@ import Philosophy from "@/components/Philosophy";
 import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
-import Philosophy2 from "@/components/Philosophy2";
+// import Philosophy2 from "@/components/Philosophy2";
+import Films from "@/components/Films";
 
 import { Import } from "lucide-react";
 
@@ -25,10 +26,14 @@ export default function HomePage() {
       <About />
       <Philosophy />
       <Gallery />
+    
+
       <section id="services" className="your-services-class">
-<Services /></section>
-      
-      <Philosophy2 />
+  <Services />
+</section>
+
+<Films />   {/* === New Films Section Added === */}
+      {/* <Philosophy2 /> */}
       <Testimonials />
     </div>
   );

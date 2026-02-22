@@ -60,12 +60,12 @@ export default function Header() {
           className="mobile-inner"
           onClick={(e) => e.stopPropagation()}
         >
-          <Link href="/" className="mobile-link">Home</Link>
-          <Link href="/about" className="mobile-link">About</Link>
-          <Link href="/#services" className="mobile-link">Services</Link>
-          <Link href="/gallery" className="mobile-link">Gallery</Link>
-          <Link href="/contact" className="mobile-link">Contact</Link>
-          <Link href="/booking" className="mobile-cta">Book Session</Link>
+        <Link href="/" className="mobile-link" onClick={() => setOpen(false)}>Home</Link>
+<Link href="/about" className="mobile-link" onClick={() => setOpen(false)}>About</Link>
+<Link href="/#services" className="mobile-link" onClick={() => setOpen(false)}>Services</Link>
+<Link href="/gallery" className="mobile-link" onClick={() => setOpen(false)}>Gallery</Link>
+<Link href="/contact" className="mobile-link" onClick={() => setOpen(false)}>Contact</Link>
+<Link href="/booking" className="mobile-cta" onClick={() => setOpen(false)}>Book Session</Link>
         </div>
       </div>
     </header>

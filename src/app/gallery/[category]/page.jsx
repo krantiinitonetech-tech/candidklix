@@ -681,19 +681,19 @@ export default function CategoryGallery() {
       {/* ===== HERO SECTION ===== */}
       <section style={{
   background: "#e9e3dc",
-  padding: "0px 0px 20px",
+  padding: "20px 16px",
   textAlign: "center"
 }}>
   <h1 style={{
-    fontFamily: "serif",
-    fontSize: "42px",
+    fontFamily: "plus-jakarta, sans-serif",
+    fontSize: "clamp(30px, 7vw, 42px)",
     marginBottom: 10,
     color: "#222"
   }}>
     {data.title}
   </h1>
 
-  <p style={{ fontSize: 16, marginBottom: 16 }}>
+  <p style={{ fontSize: 16, marginBottom: 12 }}>
     {data.tagline}
   </p>
 
@@ -713,13 +713,26 @@ export default function CategoryGallery() {
       <section style={{
         maxWidth: 1200,
         margin: "40px auto 0",
+        padding: "0 16px",
         paddingBottom: "40px"
       }}>
-        <div style={{
+        {/* <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "40px"
-        }}>
+          gap: "24px"
+        }}> */}
+<div
+  className="category-gallery-grid"
+  style={{
+    display: "grid",
+    gap: "24px"
+  }}
+>
+          {/* <div style={{
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "24px"
+}}> */}
+
           {visibleFiles.map((file, idx) => (
             <div
               key={file.id}
@@ -764,7 +777,7 @@ export default function CategoryGallery() {
 
         {/* LOAD MORE */}
         {files.length > visibleCount && (
-          <div style={{ textAlign: "center", marginTop: 60 }}>
+          <div style={{ textAlign: "center", marginTop: 40 }}>
             <button
               onClick={() => setVisibleCount(v => v + 12)}
               style={{

@@ -77,14 +77,12 @@ export default function AboutPage() {
 
           .container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 0;
-          }
+            margin: 0 auto;          }
 
           /* HERO */
           .about-hero {
             background: #ede7df;
-            padding: 50px;
+            padding: 50px 20px;
             text-align: center;
             margin-top:20px
           }
@@ -164,7 +162,6 @@ export default function AboutPage() {
           .feature-card {
             background: #ede7df;
             padding: 32px;
-            border-radius: 14px;
             box-shadow: 0 14px 34px rgba(0,0,0,0.05);
           }
           .feature-card h4 {
@@ -179,6 +176,13 @@ export default function AboutPage() {
 
           @media (max-width: 640px) {
             .about-hero h1 { font-size: 32px; }
+            .about-hero { padding: 36px 16px; }
+            .about-approach { padding: 48px 0; }
+            .about-why { padding: 54px 0 64px; }
+            .approach-text h2,
+            .why-header h2 { font-size: 28px; }
+            .approach-card,
+            .feature-card { padding: 24px; }
           }
         `}</style>
       </main>

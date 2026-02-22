@@ -86,28 +86,28 @@ export default function BookingPage() {
 
   /* ---------- Inline styles (UI only) ---------- */
   // const page = { minHeight: "100vh", background: "#fbf8f6", padding: 28, display: "flex", justifyContent: "center", alignItems: "flex-start" } as const;
-  const page = {
+const page = {
   minHeight: "100vh",
   background: "#fbf8f6",
-  padding: 28,
+  padding: "clamp(12px, 3.5vw, 28px)",
   display: "flex",
   flexDirection: "column",   // stack breadcrumb + form
   alignItems: "center",      // center the form horizontally
-  gap: 20,                   // space between breadcrumb and card
+  gap: 16,                   // space between breadcrumb and card
 } as const;
-  const card = { width: "100%", maxWidth: 900, background: "#fff", borderRadius: 14, padding: 28, boxShadow: "0 14px 40px rgba(2,6,23,0.08)" } as const;
+  const card = { width: "100%", maxWidth: 900, background: "#fff", borderRadius: 14, padding: "clamp(16px, 4vw, 28px)", boxShadow: "0 14px 40px rgba(2,6,23,0.08)" } as const;
 
 
   const header = { textAlign: "center", marginBottom: 18 } as const;
   const title = { fontFamily: "var(--font-heading, Georgia)", fontSize: 34, margin: 0, color: "var(--text-heading,#222)" } as const;
   const subtitle = { marginTop: 8, color: "var(--muted,#6f6f6f)" } as const;
-  const grid2 = { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 } as const;
+  const grid2 = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 } as const;
   const label = { display: "block", marginBottom: 6, color: "var(--muted,#777)", fontSize: 14 } as const;
   const input = { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(2,6,23,0.06)", fontSize: 15, boxSizing: "border-box" } as const;
   const textarea = { ...input, minHeight: 110, resize: "vertical" } as const;
-  const actionsRow = { display: "flex", gap: 12, marginTop: 18, alignItems: "center" } as const;
-  const primary = { flex: 1, background: "linear-gradient(180deg,#f0bfc6,#e7aeb7)", border: 0, padding: "12px 18px", borderRadius: 999, fontWeight: 700, cursor: "pointer" } as const;
-  const ghost = { flex: 1, background: "transparent", border: "1px solid rgba(2,6,23,0.08)", padding: "12px 18px", borderRadius: 999, cursor: "pointer" } as const;
+  const actionsRow = { display: "flex", gap: 12, marginTop: 18, alignItems: "center", flexWrap: "wrap" } as const;
+  const primary = { flex: 1, minWidth: 160, background: "linear-gradient(180deg,#f0bfc6,#e7aeb7)", border: 0, padding: "12px 18px", borderRadius: 999, fontWeight: 700, cursor: "pointer" } as const;
+  const ghost = { flex: 1, minWidth: 160, background: "transparent", border: "1px solid rgba(2,6,23,0.08)", padding: "12px 18px", borderRadius: 999, cursor: "pointer" } as const;
   const noteSuccess = { marginTop: 14, textAlign: "center", color: "#157347" } as const;
   const noteError = { marginTop: 14, textAlign: "center", color: "#b02a37" } as const;
 

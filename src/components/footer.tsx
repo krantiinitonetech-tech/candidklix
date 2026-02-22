@@ -57,7 +57,27 @@ export default function Footer() {
           <h3 className="footer-heading">Contact Us</h3>
 
           <ul className="footer-list">
-            <li>📞  (+1) 816-590-2011</li>
+            <li style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+  <a
+    href="https://wa.me/18165902011"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+    style={{ display: "inline-flex", alignItems: "center" }}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="17"
+      viewBox="0 0 32 32"
+      fill="#25D366"
+    >
+      <path d="M16 .396C7.164.396 0 7.56 0 16.396c0 2.89.76 5.6 2.09 7.96L0 32l7.84-2.05c2.3 1.26 4.93 1.98 7.76 1.98 8.836 0 16-7.164 16-16S24.836.396 16 .396zm0 29.04c-2.5 0-4.84-.73-6.82-1.98l-.49-.29-4.66 1.22 1.24-4.54-.32-.47A13.46 13.46 0 0 1 2.54 16.4C2.54 9.21 8.81 2.94 16 2.94c7.19 0 13.46 6.27 13.46 13.46 0 7.19-6.27 13.46-13.46 13.46zm7.41-9.93c-.4-.2-2.36-1.16-2.73-1.3-.37-.14-.64-.2-.91.2-.27.4-1.05 1.3-1.29 1.57-.24.27-.47.3-.87.1-.4-.2-1.7-.63-3.24-2.02-1.2-1.07-2.01-2.4-2.25-2.8-.24-.4-.03-.62.18-.82.18-.18.4-.47.6-.7.2-.24.27-.4.4-.67.14-.27.07-.5-.03-.7-.1-.2-.91-2.2-1.25-3.02-.33-.8-.66-.7-.91-.71l-.78-.01c-.27 0-.7.1-1.07.5-.37.4-1.4 1.36-1.4 3.3 0 1.94 1.43 3.82 1.63 4.08.2.27 2.8 4.27 6.79 5.98.95.41 1.69.66 2.27.85.95.3 1.82.26 2.5.16.76-.11 2.36-.96 2.69-1.88.33-.92.33-1.7.23-1.87-.1-.17-.37-.27-.77-.47z"/>
+    </svg>
+      <span>(+1) 816-590-2011</span>
+  </a>
+
+</li>
             <li>
               ✉️ <a href="mailto:candidklixphotography@gmail.com">candidklixphotography@gmail.com</a>
             </li>
@@ -101,7 +121,7 @@ export default function Footer() {
 
     {/* Facebook */}
     <a
-      href="https://www.facebook.com/"
+      href="https://www.facebook.com/share/18JmTrcwXY/?mibextid=wwXIfr"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Facebook"

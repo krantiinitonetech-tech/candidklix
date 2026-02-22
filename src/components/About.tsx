@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function About(): React.ReactElement {
   return (
-    <section aria-labelledby="about-heading" className="about-root">
+    <section aria-labelledby="about-heading" className="about-roots">
       <div className="container">
         <div className="about-grid">
           {/* Left: Text */}

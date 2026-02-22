@@ -85,41 +85,57 @@ export default function BookingPage() {
 };
 
   /* ---------- Inline styles (UI only) ---------- */
-  const page = { minHeight: "100vh", background: "#f7f7f7", padding: 28, display: "flex", justifyContent: "center", alignItems: "flex-start" } as const;
-  const card = { width: "100%", maxWidth: 900, background: "#fafafae4", padding: "50px 12px 50px 50px", boxShadow: "0 14px 40px rgba(2,6,23,0.08)" } as const;
+  const page = {
+    minHeight: "100vh",
+    background: "#f7f7f7",
+    padding: "clamp(12px, 3.5vw, 28px)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  } as const;
+  const card = {
+    width: "100%",
+    maxWidth: 900,
+    background: "#fafafae4",
+    padding: "clamp(16px, 4vw, 40px)",
+    boxShadow: "0 14px 40px rgba(2,6,23,0.08)",
+  } as const;
   const header = { textAlign: "center", marginBottom: 18 } as const;
   const title = { fontFamily: "var(--font-heading, Georgia)", fontSize: 34, margin: 0, color: "var(--text-heading,#222)" } as const;
   const subtitle = { marginTop: 8, color: "var(--muted,#6f6f6f)" } as const;
-  const grid2 = { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 } as const;
+  const grid2 = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 } as const;
   const label = { display: "block", marginBottom: 6, color: "black", fontSize: 14 } as const;
-  const input = { width: "90%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(2,6,23,0.06)", fontSize: 15, boxSizing: "border-box" } as const;
+  const input = { width: "100%", padding: "10px 12px", borderRadius: 0, border: "1px solid rgba(2,6,23,0.06)", fontSize: 15, boxSizing: "border-box" } as const;
   const textarea = { ...input, minHeight: 110, resize: "vertical" } as const;
 
   const actionsRow = {
   display: "flex",
+  flexWrap: "wrap",
   justifyContent: "center",
-  gap: "28px",
-  marginTop: "48px",
+  gap: "12px",
+  marginTop: "32px",
 };
 
 const primary = {
   backgroundColor: "#5a5a5a",
   color: "#ffffff",
-  padding: "12px 40px",
+  padding: "12px 26px",
   border: "none",
   fontSize: "14px",
   letterSpacing: "0.3px",
   cursor: "pointer",
+  minWidth: "160px",
 };
 
 const ghost = {
   backgroundColor: "#ffffff",
   color: "#333",
-  padding: "12px 40px",
+  padding: "12px 26px",
   border: "1px solid #d0d0d0",
   fontSize: "14px",
   letterSpacing: "0.3px",
   cursor: "pointer",
+  minWidth: "160px",
 };
 
   // const actionsRow = { display: "flex", gap: 12, marginTop: 18, alignItems: "center" } as const;
