@@ -703,7 +703,7 @@ background: #252323;
 /* Text Column */
 .about-title {
   font-family: var(--font-heading, serif);
-  font-size: 48px;
+  font-size: 42px;
   font-weight: 500;
   margin-bottom: 28px;
   color: #222;
@@ -988,7 +988,7 @@ background: #252323;
 
 .films-title {
   font-family: var(--font-heading, serif);
-  font-size: 48px;
+  font-size: 42px;
   margin-bottom: 30px;
   color: #222;
   font-weight: 500;
@@ -1238,7 +1238,7 @@ background: #252323;
 .testimonials-title {
   text-align: center;
   font-family: var(--font-heading, serif);
-  font-size: 48px;
+  font-size: 42px;
   margin-bottom: 60px;
   color: #222;
     font-weight: 500;

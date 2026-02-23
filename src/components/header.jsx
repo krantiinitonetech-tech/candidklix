@@ -16,7 +16,7 @@ export default function Header() {
     <div className="brand-logo-wrapper" aria-hidden="false">
       <div className="logo-fill">
         <Image
-          src="/candidklix-logo24.png"
+          src="/candidklix-logo248.png"
           alt="CandidKlix"
           fill
           sizes="(max-width:900px) 140px, 260px"

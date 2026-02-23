@@ -42,11 +42,10 @@ export default function Films() {
     <section className="films-root">
       <div className="films-container">
         <h2 className="films-title">Films</h2>
-
         <div className="films-video-wrapper">
           <div className="films-video-embed">
           <iframe
-  src="https://www.youtube.com/embed/tB5YZz1YCHo?autoplay=1&mute=1&loop=1&playlist=tB5YZz1YCHo&rel=0"
+  src="https://www.youtube.com/embed/_YsCDDC0ERk?autoplay=1&mute=1&loop=1&playlist=_YsCDDC0ERk&rel=0"
   title="CandidKlix Featured Film"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen

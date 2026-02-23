@@ -32,6 +32,17 @@ const plusJakarta = Plus_Jakarta_Sans({
 //   display: 'swap',
 // })
 
+/* === Added Favicon Metadata === */
+export const metadata = {
+  title: "CandidKlix",
+  description: "CandidKlix Photography",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`}>
