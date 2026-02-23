@@ -45,15 +45,14 @@ export default function Films() {
 
         <div className="films-video-wrapper">
           <div className="films-video-embed">
-            <iframe
-              src="https://www.youtube.com/embed/dMNc1nwq-UM"
-              title="CandidKlix Featured Film"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-              style={{ border: 0 }}
-            />
+          <iframe
+  src="https://www.youtube.com/embed/tB5YZz1YCHo?autoplay=1&mute=1&loop=1&playlist=tB5YZz1YCHo&rel=0"
+  title="CandidKlix Featured Film"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+  referrerPolicy="strict-origin-when-cross-origin"
+  style={{ border: 0 }}
+/>
           </div>
         </div>
 

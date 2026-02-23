@@ -620,8 +620,8 @@ background: #252323;
 
 .hero-figma {
   position: relative;
-  height: 90vh;
-  height: 90svh;
+  height: 95vh;
+  height: 95svh;
   min-height: 640px;
   width: 100%;
   overflow: hidden;
@@ -1342,7 +1342,12 @@ background: #252323;
   background: #000;
 }
 
-
+/* === Mobile Fix: Testimonials Heading Size === */
+@media (max-width: 768px) {
+  .testimonials-title {
+    font-size: 32px;   /* same as Services / Films mobile */
+  }
+}
 
 /* Gallery page styles */
 
