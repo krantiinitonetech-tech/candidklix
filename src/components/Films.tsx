@@ -37,7 +37,7 @@
 
 "use client";
 
-export default function Films(): JSX.Element {
+export default function Films() {
   return (
     <section className="films-root">
       <div className="films-container">
