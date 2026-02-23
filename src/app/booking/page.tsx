@@ -108,12 +108,20 @@ export default function BookingPage() {
   const input = { width: "100%", padding: "10px 12px", borderRadius: 0, border: "1px solid rgba(2,6,23,0.06)", fontSize: 15, boxSizing: "border-box" } as const;
   const textarea = { ...input, minHeight: 110, resize: "vertical" } as const;
 
-  const actionsRow = {
+//   const actionsRow = {
+//   display: "flex",
+//   flexWrap: "wrap",
+//   justifyContent: "center",
+//   gap: "12px",
+//   marginTop: "32px",
+// };
+
+const actionsRow: React.CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
   gap: "12px",
-  marginTop: "32px",
+  marginTop: "20px",
 };
 
 const primary = {
