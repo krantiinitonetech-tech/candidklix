@@ -4,7 +4,6 @@
 export default function AboutPage() {
   return (
     <>
-      {/* <Breadcrumb items={[{ href: "/about", label: "About" }]} /> */}
       <main className="about-root">
 
         {/* HERO */}
@@ -38,9 +37,12 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <aside className="approach-card">
-              <h3>CandidKlix</h3>
-              <p className="muted">Where Moments Become Memories</p>
+            <aside className="approach-media">
+              <img
+                src="/about-approach.png"
+                alt="Candid moments captured naturally"
+                loading="lazy"
+              />
             </aside>
           </div>
         </section>
@@ -77,24 +79,25 @@ export default function AboutPage() {
 
           .container {
             max-width: 1200px;
-            margin: 0 auto;          }
+            margin: 0 auto;
+          }
 
           /* HERO */
           .about-hero {
             background: #ede7df;
             padding: 50px 20px;
             text-align: center;
-            margin-top:20px
+            margin-top: 20px;
           }
+
           .about-hero h1 {
             font-size: 48px;
-            color: #100f0fff;
             margin-bottom: 16px;
           }
+
           .about-hero .lead {
             max-width: 820px;
             margin: 0 auto;
-            color: #010101ff;
           }
 
           /* APPROACH */
@@ -102,33 +105,52 @@ export default function AboutPage() {
             background: #f7f7f7;
             padding: 72px 0;
           }
+
           .grid-2 {
             display: grid;
             gap: 32px;
             grid-template-columns: 1fr;
+            align-items: start; /* IMPORTANT FIX */
           }
+
           @media (min-width: 900px) {
-            .grid-2 { grid-template-columns: 1fr 420px; }
+            .grid-2 {
+              grid-template-columns: 1.1fr 0.9fr;
+            }
           }
+
           .approach-text h2 {
             font-size: 36px;
             margin-bottom: 16px;
           }
+
           .approach-text p {
             color: #555;
             line-height: 1.7;
             margin-bottom: 14px;
           }
-          .approach-card {
-            background: #f7f7f7;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.06);
-           align-content: center;
+
+          /* IMAGE FIX */
+          .approach-media {
+            width: 100%;
           }
-          .approach-card .muted {
-            color: #666;
-            font-size: 14px;
+
+          .approach-media img {
+            width: 100%;
+            height: auto;           /* ← no stretching */
+            max-height: 380px;      /* desktop size */
+            object-fit: cover;
+            display: block;
+          }
+
+          @media (max-width: 899px) {
+            .approach-media {
+              order: -1;
+            }
+
+            .approach-media img {
+              max-height: 260px;    /* mobile size */
+            }
           }
 
           /* WHY */
@@ -136,15 +158,14 @@ export default function AboutPage() {
             background: #f7f7f7;
             padding: 88px 0 110px;
           }
+
           .why-header {
             text-align: center;
             margin-bottom: 48px;
           }
+
           .why-header h2 {
             font-size: 36px;
-          }
-          .why-header .lead {
-            color: #666;
           }
 
           .features-grid {
@@ -152,11 +173,17 @@ export default function AboutPage() {
             gap: 28px;
             grid-template-columns: 1fr;
           }
+
           @media (min-width: 720px) {
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
           }
+
           @media (min-width: 1100px) {
-            .features-grid { grid-template-columns: repeat(4, 1fr); }
+            .features-grid {
+              grid-template-columns: repeat(4, 1fr);
+            }
           }
 
           .feature-card {
@@ -164,10 +191,7 @@ export default function AboutPage() {
             padding: 32px;
             box-shadow: 0 14px 34px rgba(0,0,0,0.05);
           }
-          .feature-card h4 {
-          align:
-            margin-bottom: 12px;
-          }
+
           .feature-card p {
             font-size: 14px;
             line-height: 1.6;
@@ -181,7 +205,6 @@ export default function AboutPage() {
             .about-why { padding: 54px 0 64px; }
             .approach-text h2,
             .why-header h2 { font-size: 28px; }
-            .approach-card,
             .feature-card { padding: 24px; }
           }
         `}</style>

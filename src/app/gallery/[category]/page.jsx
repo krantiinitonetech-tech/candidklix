@@ -785,7 +785,7 @@ export default function CategoryGallery() {
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
-                borderRadius: 4
+                borderRadius: 0,
               }}
             >
               Load More
