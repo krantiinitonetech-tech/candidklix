@@ -92,7 +92,7 @@ h1,h2,h3,h4,h5,h6,
 /* .brand-logo-wrapper { display:flex; align-items:center; height:45px; min-width:140px; }
 .logo-fill { position:relative; height:100%; min-width:140px; width:auto; } */
 /* .brand-logo-img { object-fit:contain; transform:scale(1.3); transform-origin:left center; } */
-
+/* Changed logo size */
 .brand-logo-wrapper {
   display: flex;
   align-items: center;

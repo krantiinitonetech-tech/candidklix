@@ -1,3 +1,6 @@
+//Changed logo size
+
+
 "use client";
 
 import React, { useState } from "react";
