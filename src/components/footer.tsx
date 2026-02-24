@@ -14,7 +14,7 @@ export default function Footer() {
             {/* Updated Logo */}
             <div className="footer-logo-wrapper">
               <Image
-                src="/candidklix-logo248.png"   // Your uploaded logo file
+                src="/candidklix-logo251.png"   // Your uploaded logo file
                 alt="CandidKlix Logo"
                 width={180}                  // Adjust size as needed
                 height={60}

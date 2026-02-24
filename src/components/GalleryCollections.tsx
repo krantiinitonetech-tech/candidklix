@@ -40,7 +40,7 @@ export default function GalleryCollections() {
         {COLLECTIONS.map((c) => (
           <Link
             key={c.id}
-            href={`/gallery/${c.id}`}
+           href={`/gallery/${c.id}-photography`}
             className="gallery-card"
           >
             <div className="gallery-image">

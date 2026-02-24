@@ -269,8 +269,11 @@ export async function GET(request, context) {
     // ✅ Fix for Next.js 15+: await params
     const { category } = await context.params;
 
+// ✅ Remove "-photography" from slug
+const cleanCategory = category.replace("-photography", "");
+
     // 🔹 Find category info from local JSON
-    const cat = categories.find((c) => c.id === category);
+    const cat = categories.find((c) => c.id === cleanCategory);
     if (!cat) {
       return new Response(JSON.stringify({ error: "Category not found" }), { status: 404 });
     }

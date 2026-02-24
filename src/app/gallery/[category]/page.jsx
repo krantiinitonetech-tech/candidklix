@@ -690,10 +690,9 @@ export default function CategoryGallery() {
     marginBottom: 10,
     color: "#222"
   }}>
-    {data.title}
-  </h1>
+{`${data.title} Photography`}  </h1>
 
-  <p style={{ fontSize: 16, marginBottom: 12 }}>
+  <p style={{ fontSize: 18, marginBottom: 12 }}>
     {data.tagline}
   </p>
 
