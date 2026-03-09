@@ -352,6 +352,9 @@
 //   }
 // }
 
+
+
+//Last working code
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
 
@@ -375,3 +378,4 @@ export async function GET() {
 
   return NextResponse.redirect(url);
 }
+

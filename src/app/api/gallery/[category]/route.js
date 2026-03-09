@@ -253,6 +253,82 @@
 // }
 
 
+// import { google } from "googleapis";
+// import fs from "fs";
+// import path from "path";
+
+// // Load categories from JSON
+// const categoriesPath = path.join(process.cwd(), "src/data/categories.json");
+// const categories = JSON.parse(fs.readFileSync(categoriesPath, "utf8"));
+
+// // OAuth setup
+// const tokenPath = path.join(process.cwd(), "src/lib/googleTokens.json");
+
+// export async function GET(request, context) {
+//   try {
+//     // ✅ Fix for Next.js 15+: await params
+//     const { category } = await context.params;
+
+// // ✅ Remove "-photography" from slug
+// const cleanCategory = category.replace("-photography", "");
+
+//     // 🔹 Find category info from local JSON
+//     const cat = categories.find((c) => c.id === cleanCategory);
+//     if (!cat) {
+//       return new Response(JSON.stringify({ error: "Category not found" }), { status: 404 });
+//     }
+
+//     // 🔒 Check if Google token exists
+//     if (!fs.existsSync(tokenPath)) {
+//       return new Response("❌ Google tokens not found. Please reconnect Drive.", { status: 401 });
+//     }
+
+//     // 🔑 Load saved OAuth tokens
+
+//           const tokens = JSON.parse(fs.readFileSync(tokenPath, "utf8"));
+//     const oauth2Client = new google.auth.OAuth2(
+
+      
+//       process.env.GOOGLE_CLIENT_ID,
+//       process.env.GOOGLE_CLIENT_SECRET,
+//       process.env.GOOGLE_REDIRECT_URI
+//     );
+//     oauth2Client.setCredentials(tokens);
+//     const drive = google.drive({ version: "v3", auth: oauth2Client });
+
+//     // 🔍 Query Google Drive files for that category
+//     const mimeFilter = cat.type === "video" ? "mimeType contains 'video/'" : "mimeType contains 'image/'";
+//     const q = `'${cat.folderId}' in parents and ${mimeFilter}`;
+//     const res = await drive.files.list({
+//       q,
+//       fields: "files(id, name, mimeType)",
+//       supportsAllDrives: true,
+//     });
+
+//     // 🗂️ Map file data for frontend
+//     const files = (res.data.files || []).map((f) => ({
+//       id: f.id,
+//       name: f.name,
+//       mimeType: f.mimeType,
+//       viewUrl: `https://drive.google.com/uc?export=view&id=${f.id}`,
+//     }));
+
+// return new Response(
+//   JSON.stringify({
+//     id: cat.id,
+//     title: cat.title,
+//     tagline: cat.tagline,
+//     description: cat.description,
+//     files
+//   }),
+//   { status: 200 }
+// );
+//   } catch (error) {
+//     console.error("🔥 Error in category fetch:", error);
+//     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+//   }
+// }
+
 import { google } from "googleapis";
 import fs from "fs";
 import path from "path";
@@ -261,48 +337,51 @@ import path from "path";
 const categoriesPath = path.join(process.cwd(), "src/data/categories.json");
 const categories = JSON.parse(fs.readFileSync(categoriesPath, "utf8"));
 
-// OAuth setup
-const tokenPath = path.join(process.cwd(), "src/lib/googleTokens.json");
-
 export async function GET(request, context) {
   try {
-    // ✅ Fix for Next.js 15+: await params
     const { category } = await context.params;
 
-// ✅ Remove "-photography" from slug
-const cleanCategory = category.replace("-photography", "");
+    // Remove "-photography" from slug
+    const cleanCategory = category.replace("-photography", "");
 
-    // 🔹 Find category info from local JSON
     const cat = categories.find((c) => c.id === cleanCategory);
+
     if (!cat) {
-      return new Response(JSON.stringify({ error: "Category not found" }), { status: 404 });
+      return new Response(
+        JSON.stringify({ error: "Category not found" }),
+        { status: 404 }
+      );
     }
 
-    // 🔒 Check if Google token exists
-    if (!fs.existsSync(tokenPath)) {
-      return new Response("❌ Google tokens not found. Please reconnect Drive.", { status: 401 });
-    }
-
-    // 🔑 Load saved OAuth tokens
-    const tokens = JSON.parse(fs.readFileSync(tokenPath, "utf8"));
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.GOOGLE_REDIRECT_URI
     );
-    oauth2Client.setCredentials(tokens);
-    const drive = google.drive({ version: "v3", auth: oauth2Client });
 
-    // 🔍 Query Google Drive files for that category
-    const mimeFilter = cat.type === "video" ? "mimeType contains 'video/'" : "mimeType contains 'image/'";
+    // ✅ Use refresh token from environment variable
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    });
+
+    const drive = google.drive({
+      version: "v3",
+      auth: oauth2Client,
+    });
+
+    const mimeFilter =
+      cat.type === "video"
+        ? "mimeType contains 'video/'"
+        : "mimeType contains 'image/'";
+
     const q = `'${cat.folderId}' in parents and ${mimeFilter}`;
+
     const res = await drive.files.list({
       q,
       fields: "files(id, name, mimeType)",
       supportsAllDrives: true,
     });
 
-    // 🗂️ Map file data for frontend
     const files = (res.data.files || []).map((f) => ({
       id: f.id,
       name: f.name,
@@ -310,18 +389,23 @@ const cleanCategory = category.replace("-photography", "");
       viewUrl: `https://drive.google.com/uc?export=view&id=${f.id}`,
     }));
 
-return new Response(
-  JSON.stringify({
-    id: cat.id,
-    title: cat.title,
-    tagline: cat.tagline,
-    description: cat.description,
-    files
-  }),
-  { status: 200 }
-);
+    return new Response(
+      JSON.stringify({
+        id: cat.id,
+        title: cat.title,
+        tagline: cat.tagline,
+        description: cat.description,
+        files,
+      }),
+      { status: 200 }
+    );
+
   } catch (error) {
     console.error("🔥 Error in category fetch:", error);
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      { status: 500 }
+    );
   }
 }

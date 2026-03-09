@@ -321,14 +321,72 @@
 //   }
 // }
 
-import { google } from "googleapis";
-import fs from "fs";
-import path from "path";
 
-const tokenPath = path.join(process.cwd(), "src/lib/googleTokens.json");
+// Previous code
+// import { google } from "googleapis";
+// import fs from "fs";
+// import path from "path";
+
+// const tokenPath = path.join(process.cwd(), "src/lib/googleTokens.json");
+
+// export async function GET(request, context) {
+//   const params = await context.params; // ✅ unwrap for Next.js 15
+//   const { id } = params;
+
+//   try {
+//     if (!id) {
+//       return new Response("❌ Missing file ID", { status: 400 });
+//     }
+
+//     if (!fs.existsSync(tokenPath)) {
+//       return new Response("❌ Google tokens not found. Please reconnect Drive.", { status: 401 });
+//     }
+
+//     const tokens = JSON.parse(fs.readFileSync(tokenPath, "utf8"));
+//     const oauth2Client = new google.auth.OAuth2(
+//       process.env.GOOGLE_CLIENT_ID,
+//       process.env.GOOGLE_CLIENT_SECRET,
+//       process.env.GOOGLE_REDIRECT_URI
+//     );
+//     oauth2Client.setCredentials(tokens);
+
+//     const drive = google.drive({ version: "v3", auth: oauth2Client });
+
+//     const { data: file } = await drive.files.get({
+//       fileId: id,
+//       fields: "mimeType, name",
+//       supportsAllDrives: true,
+//     });
+
+//     const response = await drive.files.get(
+//       { fileId: id, alt: "media", supportsAllDrives: true },
+//       { responseType: "stream" }
+//     );
+
+//     const stream = response.data;
+//     const chunks = [];
+//     for await (const chunk of stream) chunks.push(chunk);
+//     const buffer = Buffer.concat(chunks);
+
+//     return new Response(buffer, {
+//       headers: {
+//         "Content-Type": file.mimeType,
+//         "Content-Disposition": `inline; filename="${file.name}"`,
+//       },
+//     });
+//   } catch (error) {
+//     console.error("🔥 Error serving Drive media:", error);
+//     if (error.errors)
+//       console.error("🔍 Drive API details:", JSON.stringify(error.errors, null, 2));
+
+//     return new Response(`Error: ${error.message}`, { status: 500 });
+//   }
+// }
+
+import { google } from "googleapis";
 
 export async function GET(request, context) {
-  const params = await context.params; // ✅ unwrap for Next.js 15
+  const params = await context.params;
   const { id } = params;
 
   try {
@@ -336,34 +394,46 @@ export async function GET(request, context) {
       return new Response("❌ Missing file ID", { status: 400 });
     }
 
-    if (!fs.existsSync(tokenPath)) {
-      return new Response("❌ Google tokens not found. Please reconnect Drive.", { status: 401 });
-    }
-
-    const tokens = JSON.parse(fs.readFileSync(tokenPath, "utf8"));
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.GOOGLE_REDIRECT_URI
     );
-    oauth2Client.setCredentials(tokens);
 
-    const drive = google.drive({ version: "v3", auth: oauth2Client });
+    // ✅ Use refresh token from Vercel environment variables
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    });
 
+    const drive = google.drive({
+      version: "v3",
+      auth: oauth2Client,
+    });
+
+    // Get file metadata
     const { data: file } = await drive.files.get({
       fileId: id,
       fields: "mimeType, name",
       supportsAllDrives: true,
     });
 
+    // Stream file
     const response = await drive.files.get(
-      { fileId: id, alt: "media", supportsAllDrives: true },
+      {
+        fileId: id,
+        alt: "media",
+        supportsAllDrives: true,
+      },
       { responseType: "stream" }
     );
 
     const stream = response.data;
     const chunks = [];
-    for await (const chunk of stream) chunks.push(chunk);
+
+    for await (const chunk of stream) {
+      chunks.push(chunk);
+    }
+
     const buffer = Buffer.concat(chunks);
 
     return new Response(buffer, {
@@ -372,10 +442,16 @@ export async function GET(request, context) {
         "Content-Disposition": `inline; filename="${file.name}"`,
       },
     });
+
   } catch (error) {
     console.error("🔥 Error serving Drive media:", error);
-    if (error.errors)
-      console.error("🔍 Drive API details:", JSON.stringify(error.errors, null, 2));
+
+    if (error.errors) {
+      console.error(
+        "🔍 Drive API details:",
+        JSON.stringify(error.errors, null, 2)
+      );
+    }
 
     return new Response(`Error: ${error.message}`, { status: 500 });
   }
