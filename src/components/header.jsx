@@ -18,14 +18,23 @@ export default function Header() {
   <Link href="/" className="brand-link" aria-label="CandidKlix home">
     <div className="brand-logo-wrapper" aria-hidden="false">
       <div className="logo-fill">
-        <Image
-          src="/candidklix-logo251.png"
+        {/* <Image
+          src="/candidklix-logo252.png"
           alt="CandidKlix"
           fill
-          sizes="(max-width:900px) 140px, 260px"
+          sizes="(max-width:900px) 120px, 260px"
           className="brand-logo-img"
           priority
-        />
+        /> */}
+<Image
+  src="/candidklix-logo252.png"
+  alt="CandidKlix Photography"
+  width={190}
+  height={50}
+  priority
+  className="brand-logo-img"
+/>
+
       </div>
     </div>
   </Link>
