@@ -39,7 +39,7 @@ export default function AboutPage() {
 
             <aside className="approach-media">
               <img
-                src="/about-approach.png"
+                src="/about-approach1.png"
                 alt="Candid moments captured naturally"
                 loading="lazy"
               />
@@ -104,6 +104,7 @@ export default function AboutPage() {
           .about-approach {
             background: #f7f7f7;
             padding: 72px 0;
+            
           }
 
           .grid-2 {
@@ -136,11 +137,12 @@ export default function AboutPage() {
           }
 
           .approach-media img {
-            width: 100%;
+            width: 80%;
             height: auto;           /* ← no stretching */
             max-height: 380px;      /* desktop size */
             object-fit: cover;
             display: block;
+            padding-top:90px;
           }
 
           @media (max-width: 899px) {
